@@ -2,8 +2,13 @@ Question Answer Survey App
 
 This app saves user response according to asked question. And the response is send to admin through mail in pdf.
 
+Important:-
+ Create environment variable EMAIL,PASSWORD to send mail.
+ Allow low secure apps in your gmail settings.
+
 Requirement:
 Python > 3.5
+
 
 (install this package using pip)
 
