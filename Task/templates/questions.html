@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<form action="{% url 'question' %}?page={{ page_obj.number }}" method="post">
+
+
+<legend>
+	Please Answer All the Mandatory Question
+</legend>
+
+{% csrf_token %}
+
+{% for questions in page_obj.object_list %}
+  <div class="form-group">
+    
+	{% if questions.answer_type == "input_box" %}
+
+    {% if questions.required %}
+    <label>{{ questions.question }}<span class="required">*</span></label>
+    <input type="text" class="form-control" required id="name" name="Answer" placeholder="Enter Your Answer">
+    {% else %}
+	<label>{{ questions.question }}</label>
+     <input type="text" class="form-control" id="name" name="Answer" placeholder="Enter Answer">
+    {% endif %}
+
+
+    {% else %}
+
+    {% if questions.required %}
+  
+     <label>{{ questions.question }}<span class="required">*</span></label>
+      <select name="Answer" required class="form-control">
+        <option value="Not Answered" selected>Select Your Option</option>
+      	{% for option in questions.options.all %}
+        <option value="{{ option.name }}">{{ option.name }}</option>
+        {% endfor %}
+      </select>
+
+      {% else %}
+
+     <label>{{ questions.question }}</label>
+      <select name="Answer" class="form-control">
+        <option value="Not Answered" selected>Select Your Option</option>
+      	{% for option in questions.options.all %}
+        <option value="{{ option.name }}">{{ option.name }}</option>
+        {% endfor %}
+      </select>
+    
+
+	{% endif %}
+
+
+{% endif %}
+
+
+
+  </div>
+
+ {% endfor %}
+
+{% if page_obj.has_next %}
+  <button type="submit" class="btn btn-primary ">Next</button>
+{% else %}
+
+ <button type="submit" class="btn btn-primary">Finish</button>
+
+{% endif %}
+
+</form>
+
+
+{% endblock %}
