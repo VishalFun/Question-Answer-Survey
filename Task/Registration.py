@@ -3,7 +3,7 @@ from . import models
 
 
 class UserInfoForm(forms.ModelForm):
-	"""docstring for USer"""
+	"""docstring for User"""
 
 	class  Meta(object):
 		"""docstring for  Meta"""
